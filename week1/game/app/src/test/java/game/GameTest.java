@@ -6,6 +6,6 @@ import org.junit.Test;
 public class GameTest {
   @Test public void testGetsWordToGuess() {
     Game game = new Game();
-    assertEquals(game.getWordToGuess(), "B_____");
+    assertEquals("B_____", game.getWordToGuess());
   }
 }

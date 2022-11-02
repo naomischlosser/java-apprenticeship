@@ -10,11 +10,8 @@ public class Game {
   }
 
   public String getWordToGuess() {
-    int wordCount = word.length();
-    for (int i = 0; i < wordCount; i++) {
-      if (i != 0) {
-        wordToGuess.replace(i, i + 1, "_");
-      }
+    for (int i = 1; i < word.length(); i++) {
+      wordToGuess.replace(i, i + 1, "_");
     }
 
     return wordToGuess.toString();

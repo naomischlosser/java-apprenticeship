@@ -2,17 +2,21 @@ package game;
 
 public class Game {
   String word;
+  StringBuilder wordToGuess;
 
   public Game(String word) {
     this.word = word;
+    this.wordToGuess = new StringBuilder(word);
   }
 
   public String getWordToGuess() {
-    // StringBuilder wordToGuess = new StringBuilder();
+    int wordCount = word.length();
+    for (int i = 0; i < wordCount; i++) {
+      if (i != 0) {
+        wordToGuess.replace(i, i + 1, "_");
+      }
+    }
 
-    // wordToGuess.append(word.charAt(0));
-    // wordToGuess.append("_____");
-
-    return word.charAt(0) + "_____";
+    return wordToGuess.toString();
   }
 }

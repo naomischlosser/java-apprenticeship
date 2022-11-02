@@ -13,7 +13,7 @@ public class TodoTest {
     Todo todo = new Todo();
     todo.addTask("Do dishes");
     todo.addTask("Walk dog");
-    assertEquals("shows a task", "Do dishes", todo.getTasks().get(0));
-    assertEquals("shows a task", "Walk dog", todo.getTasks().get(1));
+    assertEquals("shows first task in list", "Do dishes", todo.getTasks().get(0));
+    assertEquals("shows second task in list", "Walk dog", todo.getTasks().get(1));
   }
 }

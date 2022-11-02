@@ -8,4 +8,12 @@ public class TodoTest {
     Todo todo = new Todo();
     assertTrue("todo list is empty", todo.getTasks().isEmpty());
   }
+
+  @Test public void testAddsTaskToTodo() {
+    Todo todo = new Todo();
+    todo.addTask("Do dishes");
+    todo.addTask("Walk dog");
+    assertEquals("shows a task", "Do dishes", todo.getTasks().get(0));
+    assertEquals("shows a task", "Walk dog", todo.getTasks().get(1));
+  }
 }

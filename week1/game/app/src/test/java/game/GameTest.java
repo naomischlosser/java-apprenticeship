@@ -20,4 +20,9 @@ public class GameTest {
     Game game = new Game(wordChoser);
     assertEquals(Integer.valueOf(10), game.getRemainingAttempts());
   }
+
+  @Test public void testGuessTheCorrectLetterO() {
+    Game game = new Game(wordChoser);
+    assertEquals(Boolean.valueOf(true), game.guessLetter('O'));
+  }
 }

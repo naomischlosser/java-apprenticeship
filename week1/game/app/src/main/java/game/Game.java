@@ -22,4 +22,8 @@ public class Game {
   public Integer getRemainingAttempts() {
     return remainingAttempts;
   }
+
+  public Boolean guessLetter(Character letter) {
+    return true;
+  }
 }

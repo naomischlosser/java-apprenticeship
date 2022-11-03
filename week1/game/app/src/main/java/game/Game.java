@@ -3,16 +3,14 @@ package game;
 import java.util.ArrayList;
 
 public class Game {
-  String word;
-  StringBuilder wordToGuess;
-  Integer remainingAttempts;
-  ArrayList<Character> guessedLetters;
+  private String word;
+  private StringBuilder wordToGuess;
+  private Integer remainingAttempts = 10;
+  private ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
   public Game(WordChoser wordChoser) {
     word = wordChoser.getRandomWordFromDictionary();
     wordToGuess = new StringBuilder(word);
-    remainingAttempts = 10;
-    guessedLetters = new ArrayList<Character>();
   }
 
   public String getWordToGuess() {
@@ -36,7 +34,7 @@ public class Game {
       guessedLetters.add(letter);
       return true;
     } else {
-      remainingAttempts -= 1;
+      remainingAttempts--;
       return false;
     }
   }

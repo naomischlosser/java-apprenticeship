@@ -3,13 +3,13 @@ package shop;
 import java.util.ArrayList;
 
 public class ShoppingList {
-  private ArrayList<String> items = new ArrayList<String>();
+  private ArrayList<ShoppingItem> items = new ArrayList<ShoppingItem>();
   
-  public ArrayList<String> getItems() {
+  public ArrayList<ShoppingItem> getItems() {
     return items;
   }
 
-  public void addItem(String item) {
+  public void addItem(ShoppingItem item) {
     items.add(item);
   }
 }

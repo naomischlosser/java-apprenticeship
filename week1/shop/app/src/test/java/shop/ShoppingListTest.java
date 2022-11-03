@@ -5,13 +5,14 @@ import org.junit.*;
 
 public class ShoppingListTest {
   @Test public void testGetsInitialEmptyShoppingList() {
-    ShoppingList shoppingList = new ShoppingList();
-    assertTrue(shoppingList.getItems().isEmpty());
+    ShoppingList list = new ShoppingList();
+    assertTrue(list.getItems().isEmpty());
   }
 
   @Test public void testAddsAnItemToTheShoppingList() {
-    ShoppingList shoppingList = new ShoppingList();
-    shoppingList.addItem("Cookies");
-    assertEquals(String.valueOf("Cookies"), shoppingList.getItems().get(0));
+    ShoppingList list = new ShoppingList();
+    list.addItem(new ShoppingItem("Cookies", 2.95));
+    list.addItem(new ShoppingItem("Salmon", 6.50));
+    assertEquals(2, list.getItems().size());
   }
 }

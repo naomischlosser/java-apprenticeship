@@ -5,8 +5,8 @@ public class Game {
   StringBuilder wordToGuess;
   Integer remainingAttempts;
 
-  public Game(Class WordChoser) {
-    word = WordChoser.getRandomWordFromDictionary();
+  public Game(WordChoser wordChoser) {
+    word = wordChoser.getRandomWordFromDictionary();
     wordToGuess = new StringBuilder(word);
     remainingAttempts = 10;
   }

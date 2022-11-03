@@ -33,6 +33,7 @@ public class Game {
 
   public Boolean guessLetter(Character letter) {
     if (word.contains(letter.toString())) {
+      guessedLetters.add(letter);
       return true;
     } else {
       remainingAttempts -= 1;

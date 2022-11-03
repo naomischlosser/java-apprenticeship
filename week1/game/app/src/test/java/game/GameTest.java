@@ -29,6 +29,7 @@ public class GameTest {
   @Test public void testGuessTheCorrectLetterO() {
     Game game = new Game(wordChoser);
     assertEquals(Boolean.valueOf(true), game.guessLetter('O'));
+    assertEquals(Character.valueOf('O'), game.getGuessedLetters().get(0));
   }
 
   @Test public void testGuessTheIncorrectLetterY() {

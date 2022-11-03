@@ -21,6 +21,11 @@ public class GameTest {
     assertEquals(Integer.valueOf(10), game.getRemainingAttempts());
   }
 
+  @Test public void testGetsInitialGuessedLetters() {
+    Game game = new Game(wordChoser);
+    assertTrue(game.getGuessedLetters().isEmpty());
+  }
+
   @Test public void testGuessTheCorrectLetterO() {
     Game game = new Game(wordChoser);
     assertEquals(Boolean.valueOf(true), game.guessLetter('O'));

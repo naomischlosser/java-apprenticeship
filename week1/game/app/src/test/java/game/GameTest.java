@@ -1,20 +1,22 @@
 package game;
 
 import static org.junit.Assert.*;
-// import static org.mockito.Mockito.*;
-import org.junit.Test;
+import static org.mockito.Mockito.*;
+import org.junit.*;
 
 public class GameTest {
+  private static final WordChoser wordChoser = mock(WordChoser.class);
+
+  @Before public void setupTests() {
+    when(wordChoser.getRandomWordFromDictionary()).thenReturn("MAKERS");
+  }
+
   @Test public void testGetsWordToGuess() {
-    String[] DICTIONARY = {"MAKERS"};
-    WordChoser wordChoser = new WordChoser(DICTIONARY);
     Game game = new Game(wordChoser);
     assertEquals(String.valueOf("M_____"), game.getWordToGuess());
   }
 
   @Test public void testGetsInitialRemainingAttempts() {
-    String[] DICTIONARY = {"MAKERS"};
-    WordChoser wordChoser = new WordChoser(DICTIONARY);
     Game game = new Game(wordChoser);
     assertEquals(Integer.valueOf(10), game.getRemainingAttempts());
   }

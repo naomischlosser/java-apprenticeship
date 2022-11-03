@@ -29,5 +29,6 @@ public class GameTest {
   @Test public void testGuessTheIncorrectLetterY() {
     Game game = new Game(wordChoser);
     assertEquals(Boolean.valueOf(false), game.guessLetter('Y'));
+    assertEquals(Integer.valueOf(9), game.getRemainingAttempts());
   }
 }

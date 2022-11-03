@@ -27,6 +27,7 @@ public class Game {
     if (word.contains(letter.toString())) {
       return true;
     } else {
+      remainingAttempts -= 1;
       return false;
     }
   }

@@ -24,6 +24,10 @@ public class Game {
   }
 
   public Boolean guessLetter(Character letter) {
-    return true;
+    if (word.contains(letter.toString())) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

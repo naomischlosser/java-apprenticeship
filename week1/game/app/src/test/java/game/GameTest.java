@@ -25,4 +25,9 @@ public class GameTest {
     Game game = new Game(wordChoser);
     assertEquals(Boolean.valueOf(true), game.guessLetter('O'));
   }
+
+  @Test public void testGuessTheIncorrectLetterY() {
+    Game game = new Game(wordChoser);
+    assertEquals(Boolean.valueOf(false), game.guessLetter('Y'));
+  }
 }

@@ -5,10 +5,10 @@ public class Game {
   StringBuilder wordToGuess;
   Integer remainingAttempts;
 
-  public Game(String word) {
-    this.word = word;
-    this.wordToGuess = new StringBuilder(word);
-    this.remainingAttempts = 10;
+  public Game(Class WordChoser) {
+    word = WordChoser.getRandomWordFromDictionary();
+    wordToGuess = new StringBuilder(word);
+    remainingAttempts = 10;
   }
 
   public String getWordToGuess() {

@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 public class Game {
   private String word;
-  private StringBuilder builder;
+  private StringBuilder builder = new StringBuilder();
   private Integer remainingAttempts = 10;
   private ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
   public Game(WordChoser wordChoser) {
     word = wordChoser.getRandomWordFromDictionary();
-    builder = new StringBuilder(word);
   }
 
   public static void main(String[] args) {}
 
   public String getWordToGuess() {
-    for (int i = 1; i < word.length(); i++) {
+    for (int i = 0; i < word.length(); i++) {
       Character currentLetter = word.charAt(i);
-
-      if (guessedLetters.contains(currentLetter)) {
-        int j = word.indexOf(currentLetter);
-        while (j >= 0) {
-          builder.replace(j, j + 1, currentLetter.toString());
-          j = word.indexOf(currentLetter, j + 1);
-        }
+      if (i == 0) {
+        // always show first letter
+        builder.append(currentLetter);
       } else {
-        builder.replace(i, i + 1, "_");
+        // show guessed letter(s)
+        if (guessedLetters.contains(currentLetter)) {
+            builder.append(currentLetter);
+        } else {
+          builder.append("_");
+        }
       }
     }
 
@@ -41,13 +41,11 @@ public class Game {
     return guessedLetters;
   }
 
-  public Boolean guessLetter(Character letter) {
+  public void guessLetter(Character letter) {
     if (word.contains(letter.toString())) {
       guessedLetters.add(letter);
-      return true;
     } else {
       remainingAttempts--;
-      return false;
     }
   }
 }

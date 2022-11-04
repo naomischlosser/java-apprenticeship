@@ -16,14 +16,10 @@ public class GameTest {
     assertEquals(String.valueOf("M_________"), game.getWordToGuess());
   }
 
-  @Test public void testGetsWordToGuessWithGuessedLetter() {
+  @Test public void testGetsWordToGuessWithGuessedLetterO() {
     Game game = new Game(wordChoser);
     game.guessLetter('O');
     assertEquals(String.valueOf("MO_____O__"), game.getWordToGuess());
-    game.guessLetter('W');
-    assertEquals(String.valueOf("MO____WO__"), game.getWordToGuess());
-    game.guessLetter('B');
-    assertEquals(String.valueOf("MO____WO__"), game.getWordToGuess());
   }
 
   @Test public void testGetsInitialRemainingAttempts() {
@@ -38,13 +34,13 @@ public class GameTest {
 
   @Test public void testGuessTheCorrectLetterO() {
     Game game = new Game(wordChoser);
-    assertEquals(Boolean.valueOf(true), game.guessLetter('O'));
+    game.guessLetter('O');
     assertEquals(Character.valueOf('O'), game.getGuessedLetters().get(0));
   }
 
   @Test public void testGuessTheIncorrectLetterY() {
     Game game = new Game(wordChoser);
-    assertEquals(Boolean.valueOf(false), game.guessLetter('Y'));
+    game.guessLetter('Y');
     assertEquals(Integer.valueOf(9), game.getRemainingAttempts());
   }
 }

@@ -4,33 +4,33 @@ import java.util.ArrayList;
 
 public class Game {
   private String word;
-  private StringBuilder wordToGuess;
+  private StringBuilder builder;
   private Integer remainingAttempts = 10;
   private ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
   public Game(WordChoser wordChoser) {
     word = wordChoser.getRandomWordFromDictionary();
-    wordToGuess = new StringBuilder(word);
+    builder = new StringBuilder(word);
   }
 
   public static void main(String[] args) {}
 
   public String getWordToGuess() {
     for (int i = 1; i < word.length(); i++) {
-      Character letter = word.charAt(i);
+      Character currentLetter = word.charAt(i);
 
-      if (guessedLetters.contains(letter)) {
-        int j = word.indexOf(letter);
+      if (guessedLetters.contains(currentLetter)) {
+        int j = word.indexOf(currentLetter);
         while (j >= 0) {
-          wordToGuess.replace(j, j + 1, letter.toString());
-          j = word.indexOf(letter, j + 1);
+          builder.replace(j, j + 1, currentLetter.toString());
+          j = word.indexOf(currentLetter, j + 1);
         }
       } else {
-        wordToGuess.replace(i, i + 1, "_");
+        builder.replace(i, i + 1, "_");
       }
     }
 
-    return wordToGuess.toString();
+    return builder.toString();
   }
 
   public Integer getRemainingAttempts() {

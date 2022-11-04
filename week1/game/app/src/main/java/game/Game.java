@@ -17,7 +17,17 @@ public class Game {
 
   public String getWordToGuess() {
     for (int i = 1; i < word.length(); i++) {
-      wordToGuess.replace(i, i + 1, "_");
+      Character letter = word.charAt(i);
+
+      if (guessedLetters.contains(letter)) {
+        int j = word.indexOf(letter);
+        while (j >= 0) {
+          wordToGuess.replace(j, j + 1, letter.toString());
+          j = word.indexOf(letter, j + 1);
+        }
+      } else {
+        wordToGuess.replace(i, i + 1, "_");
+      }
     }
 
     return wordToGuess.toString();

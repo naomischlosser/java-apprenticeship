@@ -12,8 +12,6 @@ public class Game {
     word = wordChoser.getRandomWordFromDictionary();
   }
 
-  public static void main(String[] args) {}
-
   public String getWordToGuess() {
     for (int i = 0; i < word.length(); i++) {
       Character currentLetter = word.charAt(i);

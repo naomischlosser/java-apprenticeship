@@ -9,8 +9,8 @@ public class WordChoser {
   
   public String getRandomWordFromDictionary() {
     Random rand = new Random();
-    Integer index = rand.nextInt(DICTIONARY.length);
-    
+    int index = rand.nextInt(DICTIONARY.length);
+
     return DICTIONARY[index];
   }
 }

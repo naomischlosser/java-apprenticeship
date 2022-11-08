@@ -5,7 +5,7 @@ package game;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "Welcome! Today the word to guess is:";
     }
 
     public static void main(String[] args) {

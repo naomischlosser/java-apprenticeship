@@ -3,10 +3,10 @@ package game;
 import java.util.ArrayList;
 
 public class Game {
-  private String word;
-  private StringBuilder builder = new StringBuilder();
+  private final String word;
+  private final StringBuilder builder = new StringBuilder();
   private Integer remainingAttempts = 10;
-  private ArrayList<Character> guessedLetters = new ArrayList<Character>();
+  private final ArrayList<Character> guessedLetters = new ArrayList<>();
 
   public Game(WordChoser wordChoser) {
     word = wordChoser.getRandomWordFromDictionary();

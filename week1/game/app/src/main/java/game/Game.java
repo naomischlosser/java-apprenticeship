@@ -39,11 +39,13 @@ public class Game {
     return guessedLetters;
   }
 
-  public void guessLetter(Character letter) {
+  public Boolean guessLetter(Character letter) {
     if (word.contains(letter.toString())) {
       guessedLetters.add(letter);
+      return true;
     } else {
       remainingAttempts--;
+      return false;
     }
   }
 }

@@ -35,12 +35,13 @@ public class GameTest {
   @Test public void testGuessTheCorrectLetterO() {
     Game game = new Game(wordChoser);
     game.guessLetter('O');
+    assertEquals(Boolean.TRUE, game.guessLetter('O'));
     assertEquals(Character.valueOf('O'), game.getGuessedLetters().get(0));
   }
 
   @Test public void testGuessTheIncorrectLetterY() {
     Game game = new Game(wordChoser);
-    game.guessLetter('Y');
+    assertEquals(Boolean.FALSE, game.guessLetter('Y'));
     assertEquals(Integer.valueOf(9), game.getRemainingAttempts());
   }
 }

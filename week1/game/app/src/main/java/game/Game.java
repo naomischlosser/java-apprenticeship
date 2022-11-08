@@ -13,6 +13,7 @@ public class Game {
   }
 
   public String getWordToGuess() {
+    builder.setLength(0);
     for (int i = 0; i < word.length(); i++) {
       Character currentLetter = word.charAt(i);
       if (i == 0) {

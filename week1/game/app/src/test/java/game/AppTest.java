@@ -22,12 +22,26 @@ public class AppTest {
         when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
     }
 
-    @Test public void testGuessOneLetterWord() {
-        String[] helper = helper("A");
+    @Test public void testGuessTwoLetterWord() throws IOException {
+        String[] helper = helper("A\nC\nB");
+
+        // show welcome message
         assertEquals("Welcome! Today the word to guess is:", helper[0]);
+
+        // first loop
+        assertEquals("A_", helper[1]);
+        assertEquals("Enter one letter to guess (10 attempts remaining): ", helper[2]);
+        assertEquals("Right!", helper[3]);
+
+        // second loop
+        assertEquals("Wrong...", helper[6]);
+
+        // third loop
+        assertEquals("Enter one letter to guess (9 attempts remaining): ", helper[8]);
+        assertEquals("Right!", helper[9]);
     }
 
-    private String[] helper(String userInput) {
+    private String[] helper(String userInput) throws IOException {
         ArrayList<Character> captured = new ArrayList<>();
         InputStream input = new ByteArrayInputStream(userInput.getBytes());
         OutputStream output = new OutputStream() {

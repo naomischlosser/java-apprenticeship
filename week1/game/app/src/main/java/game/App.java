@@ -3,10 +3,7 @@
  */
 package game;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Scanner;
 
 public class App {
@@ -20,21 +17,19 @@ public class App {
         this.game = game;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         App app = new App(System.in, System.out, new Game(new WordChoser()));
-
         app.run();
     }
 
-    public void run() {
+    public void run() throws IOException {
         output.println("Welcome! Today the word to guess is:");
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             output.println(game.getWordToGuess());
             output.printf("Enter one letter to guess (%d attempts remaining): \n", game.getRemainingAttempts());
 
-            Scanner in = new Scanner(input);
-            Character letter = in.next().charAt(0);
+            Character letter = input.readLine().charAt(0);
             Boolean result = game.guessLetter(letter);
 
             if (result) {

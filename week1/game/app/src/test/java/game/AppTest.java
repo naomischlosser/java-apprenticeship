@@ -3,12 +3,47 @@
  */
 package game;
 
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+
+    private static final WordChoser wordChoser = mock(WordChoser.class);
+
+    @Before
+    public void setupTests() {
+        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
+    }
+
+    @Test public void testGuessOneLetterWord() {
+        String[] helper = helper("A");
+        assertEquals("Welcome! Today the word to guess is:", helper[0]);
+    }
+
+    private String[] helper(String userInput) {
+        ArrayList<Character> captured = new ArrayList<>();
+        InputStream input = new ByteArrayInputStream(userInput.getBytes());
+        OutputStream output = new OutputStream() {
+            @Override
+            public void write(int inByteValue) throws IOException {
+                captured.add((char) inByteValue);
+            }
+        };
+
+        App app = new App(input, new PrintStream(output), new Game(wordChoser));
+        app.run();
+        String str = captured.stream()
+                .map(e->e.toString())
+                .reduce((acc, e) -> acc  + e)
+                .get();
+        String[] lines = str.split("\\r?\\n");
+        return lines;
     }
 }

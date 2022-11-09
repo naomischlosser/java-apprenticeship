@@ -3,33 +3,44 @@
  */
 package game;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class App {
-    public String getGreeting() {
-        return "Welcome! Today the word to guess is:";
+    private final BufferedReader input;
+    private final PrintStream output;
+    private final Game game;
+
+    public App(InputStream input, PrintStream output, Game game) {
+        this.input = new BufferedReader(new InputStreamReader(input));
+        this.output = output;
+        this.game = game;
     }
 
     public static void main(String[] args) {
-        // initialise class
-        WordChoser wordChoser = new WordChoser();
-        Game game = new Game(wordChoser);
+        App app = new App(System.in, System.out, new Game(new WordChoser()));
 
-        // print game to console
-        System.out.println(new App().getGreeting());
+        app.run();
+    }
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(game.getWordToGuess());
-            System.out.printf("Enter one letter to guess (%d attempts remaining): \n", game.getRemainingAttempts());
+    public void run() {
+        output.println("Welcome! Today the word to guess is:");
 
-            Scanner in = new Scanner(System.in);
+        for (int i = 0; i < 1; i++) {
+            output.println(game.getWordToGuess());
+            output.printf("Enter one letter to guess (%d attempts remaining): \n", game.getRemainingAttempts());
+
+            Scanner in = new Scanner(input);
             Character letter = in.next().charAt(0);
             Boolean result = game.guessLetter(letter);
 
             if (result) {
-                System.out.println("Right!");
+                output.println("Right!");
             } else {
-                System.out.println("Wrong...");
+                output.println("Wrong...");
             }
         }
     }

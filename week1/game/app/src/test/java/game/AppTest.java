@@ -23,7 +23,7 @@ public class AppTest {
     }
 
     @Test public void testGuessTwoLetterWord() throws IOException {
-        String[] helper = helper("A\nC\nB");
+        String[] helper = helper("A\nC\nB", 3);
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", helper[0]);
@@ -41,7 +41,7 @@ public class AppTest {
         assertEquals("Right!", helper[9]);
     }
 
-    private String[] helper(String userInput) throws IOException {
+    private String[] helper(String userInput, int tries) throws IOException {
         ArrayList<Character> captured = new ArrayList<>();
         InputStream input = new ByteArrayInputStream(userInput.getBytes());
         OutputStream output = new OutputStream() {
@@ -51,7 +51,7 @@ public class AppTest {
             }
         };
 
-        App app = new App(input, new PrintStream(output), new Game(wordChoser));
+        App app = new App(input, new PrintStream(output), new Game(wordChoser), tries);
         app.run();
         String str = captured.stream()
                 .map(e->e.toString())

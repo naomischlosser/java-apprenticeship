@@ -4,28 +4,29 @@
 package game;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class App {
     private final BufferedReader input;
     private final PrintStream output;
     private final Game game;
+    private final int tries;
 
-    public App(InputStream input, PrintStream output, Game game) {
+    public App(InputStream input, PrintStream output, Game game, int tries) {
         this.input = new BufferedReader(new InputStreamReader(input));
         this.output = output;
         this.game = game;
+        this.tries = tries;
     }
 
     public static void main(String[] args) throws IOException {
-        App app = new App(System.in, System.out, new Game(new WordChoser()));
+        App app = new App(System.in, System.out, new Game(new WordChoser()), 10);
         app.run();
     }
 
     public void run() throws IOException {
         output.println("Welcome! Today the word to guess is:");
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < tries; i++) {
             output.println(game.getWordToGuess());
             output.printf("Enter one letter to guess (%d attempts remaining): \n", game.getRemainingAttempts());
 

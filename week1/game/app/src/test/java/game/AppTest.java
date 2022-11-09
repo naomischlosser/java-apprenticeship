@@ -23,27 +23,31 @@ public class AppTest {
     }
 
     @Test public void testGuessTwoLetterWord() throws IOException {
-        String[] helper = helper("A\nC\nB", 3);
+        // define user input and number of tries
+        String[] appOutput = runApp("A\nC\nB", 3);
 
         // show welcome message
-        assertEquals("Welcome! Today the word to guess is:", helper[0]);
+        assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
 
         // first loop
-        assertEquals("A_", helper[1]);
-        assertEquals("Enter one letter to guess (10 attempts remaining): ", helper[2]);
-        assertEquals("Right!", helper[3]);
+        assertEquals("A_", appOutput[1]);
+        assertEquals("Enter one letter to guess (10 attempts remaining): ", appOutput[2]);
+        assertEquals("Right!", appOutput[3]);
 
         // second loop
-        assertEquals("Wrong...", helper[6]);
+        assertEquals("Wrong...", appOutput[6]);
 
         // third loop
-        assertEquals("Enter one letter to guess (9 attempts remaining): ", helper[8]);
-        assertEquals("Right!", helper[9]);
+        assertEquals("Enter one letter to guess (9 attempts remaining): ", appOutput[8]);
+        assertEquals("Right!", appOutput[9]);
     }
 
-    private String[] helper(String userInput, int tries) throws IOException {
-        ArrayList<Character> captured = new ArrayList<>();
+    private String[] runApp(String userInput, int tries) throws IOException {
+        // instead of System.in (what a user types into the console)
         InputStream input = new ByteArrayInputStream(userInput.getBytes());
+
+        // instead of System.out (what the console returns)
+        ArrayList<Character> captured = new ArrayList<>();
         OutputStream output = new OutputStream() {
             @Override
             public void write(int inByteValue) throws IOException {
@@ -53,9 +57,11 @@ public class AppTest {
 
         App app = new App(input, new PrintStream(output), new Game(wordChoser), tries);
         app.run();
-        String str = captured.stream()
+
+        // modify captured to something that is testable
+        String appOutput = captured.stream()
                 .map(Object::toString)
                 .reduce("", (acc, e) -> acc  + e);
-        return str.split("\\r?\\n");
+        return appOutput.split("\\r?\\n");
     }
 }

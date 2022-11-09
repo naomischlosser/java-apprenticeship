@@ -54,10 +54,8 @@ public class AppTest {
         App app = new App(input, new PrintStream(output), new Game(wordChoser), tries);
         app.run();
         String str = captured.stream()
-                .map(e->e.toString())
-                .reduce((acc, e) -> acc  + e)
-                .get();
-        String[] lines = str.split("\\r?\\n");
-        return lines;
+                .map(Object::toString)
+                .reduce("", (acc, e) -> acc  + e);
+        return str.split("\\r?\\n");
     }
 }

@@ -28,6 +28,12 @@ public class App {
 
         for (int i = 0; i < tries; i++) {
             output.println(game.getWordToGuess());
+
+            if (game.isGameWon()) {
+                output.println("You won!");
+                break;
+            }
+
             output.printf("Enter one letter to guess (%d attempts remaining): \n", game.getRemainingAttempts());
 
             Character letter = input.readLine().charAt(0);

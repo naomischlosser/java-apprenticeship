@@ -17,14 +17,12 @@ public class AppTest {
 
     private static final WordChoser wordChoser = mock(WordChoser.class);
 
-    @Before
-    public void setupTests() {
+    @Test public void testGuessTwoLetterWordWithin10Tries() throws IOException {
+        // define word from dictionary
         when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
-    }
 
-    @Test public void testGuessTwoLetterWord() throws IOException {
         // define user input and number of tries
-        String[] appOutput = runApp("A\nC\nB", 3);
+        String[] appOutput = runApp("A\nC\nB", 4);
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
@@ -40,6 +38,7 @@ public class AppTest {
         // third loop
         assertEquals("Enter one letter to guess (9 attempts remaining): ", appOutput[8]);
         assertEquals("Right!", appOutput[9]);
+        assertEquals("You won!", appOutput[11]);
     }
 
     private String[] runApp(String userInput, int tries) throws IOException {

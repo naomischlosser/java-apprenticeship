@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Game {
   private final String word;
@@ -48,5 +49,13 @@ public class Game {
       remainingAttempts--;
       return false;
     }
+  }
+
+  public Boolean isGameLost() {
+    return remainingAttempts == 0;
+  }
+
+  public Boolean isGameWon() {
+    return Objects.equals(word, builder.toString());
   }
 }

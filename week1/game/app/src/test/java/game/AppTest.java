@@ -17,10 +17,11 @@ public class AppTest {
 
     private static final WordChoser wordChoser = mock(WordChoser.class);
 
-    @Test public void testGuessTwoLetterWordWithin10Tries() throws IOException {
-        // define word from dictionary
+    @Before public void setupTests() {
         when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
+    }
 
+    @Test public void testGuessTwoLetterWordWithin10Tries() throws IOException {
         // define user input and number of tries
         String[] appOutput = runApp("A\nC\nB", 4);
 
@@ -42,9 +43,6 @@ public class AppTest {
     }
 
     @Test public void testGuessTwoLetterWordGoneWrong() throws IOException {
-        // define word from dictionary
-        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
-
         // define user input and number of tries
         String userInput = "C\n".repeat(10);
         String[] appOutput = runApp(userInput, 11);

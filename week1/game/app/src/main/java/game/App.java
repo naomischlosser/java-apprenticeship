@@ -19,7 +19,7 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        App app = new App(System.in, System.out, new Game(new WordChoser()), 10);
+        App app = new App(System.in, System.out, new Game(new WordChoser()), 11);
         app.run();
     }
 
@@ -31,6 +31,9 @@ public class App {
 
             if (game.isGameWon()) {
                 output.println("You won!");
+                break;
+            } else if (game.isGameLost()) {
+                output.println("You lost...");
                 break;
             }
 

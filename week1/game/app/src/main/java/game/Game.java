@@ -56,6 +56,6 @@ public class Game {
   }
 
   public Boolean isGameWon() {
-    return Objects.equals(word, builder.toString());
+    return Objects.equals(word, getWordToGuess());
   }
 }

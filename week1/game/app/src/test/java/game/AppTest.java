@@ -41,6 +41,28 @@ public class AppTest {
         assertEquals("You won!", appOutput[11]);
     }
 
+    @Test public void testGuessTwoLetterWordGoneWrong() throws IOException {
+        // define word from dictionary
+        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
+
+        // define user input and number of tries
+        String userInput = "C\n".repeat(10);
+        String[] appOutput = runApp(userInput, 11);
+
+        // show welcome message
+        assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
+
+        // first loop
+        assertEquals("A_", appOutput[1]);
+        assertEquals("Enter one letter to guess (10 attempts remaining): ", appOutput[2]);
+        assertEquals("Wrong...", appOutput[3]);
+
+        // tenth loop
+        assertEquals("Enter one letter to guess (1 attempts remaining): ", appOutput[29]);
+        assertEquals("Wrong...", appOutput[30]);
+        assertEquals("You lost...", appOutput[32]);
+    }
+
     private String[] runApp(String userInput, int tries) throws IOException {
         // instead of System.in (what a user types into the console)
         InputStream input = new ByteArrayInputStream(userInput.getBytes());

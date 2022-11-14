@@ -70,8 +70,6 @@ public class GameTest {
     game.guessLetter('R');
     game.guessLetter('D');
 
-    game.getWordToGuess();
-
     assertEquals(TRUE, game.isGameWon());
   }
 }

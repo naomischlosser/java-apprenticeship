@@ -12,17 +12,6 @@ public class GameTest {
     when(wordChoser.getRandomWordFromDictionary()).thenReturn("MOCKEDWORD");
   }
 
-  @Test public void testGetsInitialWordToGuess() {
-    Game game = new Game(wordChoser);
-    assertEquals(String.valueOf("M_________"), game.getWordToGuess());
-  }
-
-  @Test public void testGetsWordToGuessWithGuessedLetterO() {
-    Game game = new Game(wordChoser);
-    game.guessLetter('O');
-    assertEquals(String.valueOf("MO_____O__"), game.getWordToGuess());
-  }
-
   @Test public void testGetsInitialRemainingAttempts() {
     Game game = new Game(wordChoser);
     assertEquals(Integer.valueOf(10), game.getRemainingAttempts());

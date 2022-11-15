@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Masker {
     private final StringBuilder builder = new StringBuilder();
-    public String getMaskedWord(String wordToGuess, ArrayList<Character> guessedLetters) {
+    public String getMaskedWord(String word, ArrayList<Character> guessedLetters) {
         builder.setLength(0);
-        for (int i = 0; i < wordToGuess.length(); i++) {
-            Character currentLetter = wordToGuess.charAt(i);
+        for (int i = 0; i < word.length(); i++) {
+            Character currentLetter = word.charAt(i);
             if (i == 0) {
                 // always show first letter
                 builder.append(currentLetter);

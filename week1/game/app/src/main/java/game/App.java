@@ -19,7 +19,7 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        App app = new App(System.in, System.out, new Game(new WordChoser()), 11);
+        App app = new App(System.in, System.out, new Game(new WordChoser(), new Masker()), 11);
         app.run();
     }
 
@@ -27,7 +27,9 @@ public class App {
         output.println("Welcome! Today the word to guess is:");
 
         for (int i = 0; i < tries; i++) {
-            output.println(game.getWordToGuess());
+            String wordToGuess = game.getWordToGuess();
+
+            output.println(wordToGuess);
 
             if (game.isGameWon()) {
                 output.println("You won!");

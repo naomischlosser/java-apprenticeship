@@ -7,7 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -17,13 +20,19 @@ public class AppTest {
 
     private static final WordChoser wordChoser = mock(WordChoser.class);
 
+    private static final Masker masker = mock(Masker.class);
+
     @Before public void setupTests() {
         when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
     }
 
     @Test public void testGuessTwoLetterWordWithin10Tries() throws IOException {
+        // mock getMaskedWord
+        when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
+        when(masker.getMaskedWord("AB", new ArrayList<>(List.of('B')))).thenReturn("AB");
+
         // define user input and number of tries
-        String[] appOutput = runApp("A\nC\nB", 4);
+        String[] appOutput = runApp("C\nB", 3);
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
@@ -31,18 +40,22 @@ public class AppTest {
         // first loop
         assertEquals("A_", appOutput[1]);
         assertEquals("Enter one letter to guess (10 attempts remaining): ", appOutput[2]);
-        assertEquals("Right!", appOutput[3]);
+        assertEquals("Wrong...", appOutput[3]);
 
         // second loop
-        assertEquals("Wrong...", appOutput[6]);
+        assertEquals("A_", appOutput[4]);
+        assertEquals("Enter one letter to guess (9 attempts remaining): ", appOutput[5]);
+        assertEquals("Right!", appOutput[6]);
 
         // third loop
-        assertEquals("Enter one letter to guess (9 attempts remaining): ", appOutput[8]);
-        assertEquals("Right!", appOutput[9]);
-        assertEquals("You won!", appOutput[11]);
+        assertEquals("AB", appOutput[7]);
+        assertEquals("You won!", appOutput[8]);
     }
 
     @Test public void testGuessTwoLetterWordGoneWrong() throws IOException {
+        // mock getMaskedWord
+        when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
+
         // define user input and number of tries
         String userInput = "C\n".repeat(10);
         String[] appOutput = runApp(userInput, 11);
@@ -74,7 +87,7 @@ public class AppTest {
             }
         };
 
-        App app = new App(input, new PrintStream(output), new Game(wordChoser), tries);
+        App app = new App(input, new PrintStream(output), new Game(wordChoser, masker), tries);
         app.run();
 
         // modify captured to something that is testable

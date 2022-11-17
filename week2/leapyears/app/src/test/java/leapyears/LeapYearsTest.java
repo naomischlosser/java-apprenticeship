@@ -23,4 +23,9 @@ public class LeapYearsTest {
     int year = 2004;
     assertEquals(TRUE, LeapYears.isLeapYear(year));
   }
+
+  @Test public void testYear2009IsLeapYear() {
+    int year = 2009;
+    assertEquals(FALSE, LeapYears.isLeapYear(year));
+  }
 }

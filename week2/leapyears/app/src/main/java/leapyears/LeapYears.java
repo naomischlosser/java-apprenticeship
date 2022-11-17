@@ -21,6 +21,24 @@ public class LeapYears {
   }
 
   public static int getClosestLeapYear(int year) {
-    return 2000;
+    int delta = 4;
+    ArrayList<Integer> leapYears = getLeapYears(year - delta, year + delta);
+
+    int nearest = delta;
+    int bestDeltaFoundYet = delta;
+
+    for (Integer leapYear : leapYears) {
+      if (leapYear == year) {
+        return leapYear;
+      } else {
+        int d = Math.abs(year - leapYear);
+        if (d < bestDeltaFoundYet) {
+          bestDeltaFoundYet = d;
+          nearest = leapYear;
+        }
+      }
+    }
+
+    return nearest;
   }
 }

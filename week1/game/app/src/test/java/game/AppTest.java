@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -15,39 +16,50 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AppTest {
-
     private static final WordChoser wordChoser = mock(WordChoser.class);
-
     private static final Masker masker = mock(Masker.class);
+    private static final Player player = mock(Player.class);
 
     @Before public void setupTests() {
-        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB");
+        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB", "CD");
+        when(player.randomisePlayer()).thenReturn(0);
     }
 
-    @Test public void testGuessTwoLetterWordWithin10Tries() throws IOException {
-        // mock getMaskedWord
+    // two player game
+    @Test public void testPlayer1GuessesTwoLetterWordWithin10Tries() throws IOException {
+        // mock getMaskedWord for player 1
         when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
         when(masker.getMaskedWord("AB", new ArrayList<>(List.of('B')))).thenReturn("AB");
 
+        // mock getMaskedWord for player 2
+        when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
+
         // define user input and number of tries
-        String[] appOutput = runApp("C\nB", 3);
+        String[] appOutput = runApp("E\nF\nB\nX", 2);
+        System.out.println(Arrays.toString(appOutput));
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
+        assertEquals("Player 1: A_", appOutput[1]);
+        assertEquals("Player 2: C_", appOutput[2]);
 
         // first loop
-        assertEquals("A_", appOutput[1]);
-        assertEquals("Enter one letter to guess (10 attempts remaining): ", appOutput[2]);
-        assertEquals("Wrong...", appOutput[3]);
+        assertEquals("Player 1: Enter one letter to guess (10 attempts remaining):", appOutput[4]);
+        assertEquals("Wrong...", appOutput[5]);
+        assertEquals("A_", appOutput[6]);
 
         // second loop
-        assertEquals("A_", appOutput[4]);
-        assertEquals("Enter one letter to guess (9 attempts remaining): ", appOutput[5]);
-        assertEquals("Right!", appOutput[6]);
+        assertEquals("Player 2: Enter one letter to guess (10 attempts remaining):", appOutput[8]);
+        assertEquals("Wrong...", appOutput[9]);
+        assertEquals("C_", appOutput[10]);
 
         // third loop
-        assertEquals("AB", appOutput[7]);
-        assertEquals("You won!", appOutput[8]);
+        assertEquals("Player 1: Enter one letter to guess (9 attempts remaining):", appOutput[12]);
+        assertEquals("Right!", appOutput[13]);
+        assertEquals("AB", appOutput[14]);
+
+        // game results
+        assertEquals("Player 1 won!", appOutput[16]);
     }
 
     @Test public void testGuessTwoLetterWordGoneWrong() throws IOException {
@@ -63,11 +75,11 @@ public class AppTest {
 
         // first loop
         assertEquals("A_", appOutput[1]);
-        assertEquals("Enter one letter to guess (10 attempts remaining): ", appOutput[2]);
+        assertEquals("Enter one letter to guess (10 attempts remaining):", appOutput[2]);
         assertEquals("Wrong...", appOutput[3]);
 
         // tenth loop
-        assertEquals("Enter one letter to guess (1 attempts remaining): ", appOutput[29]);
+        assertEquals("Enter one letter to guess (1 attempts remaining):", appOutput[29]);
         assertEquals("Wrong...", appOutput[30]);
         assertEquals("You lost...", appOutput[32]);
     }
@@ -80,12 +92,14 @@ public class AppTest {
         ArrayList<Character> captured = new ArrayList<>();
         OutputStream output = new OutputStream() {
             @Override
-            public void write(int inByteValue) throws IOException {
+            public void write(int inByteValue) {
                 captured.add((char) inByteValue);
             }
         };
 
-        App app = new App(input, new PrintStream(output), new Game(wordChoser, masker), tries);
+        Game game1 = new Game(wordChoser, masker);
+        Game game2 = new Game(wordChoser, masker);
+        App app = new App(input, new PrintStream(output), new ArrayList<>(List.of(game1, game2)), new Player(), tries);
         app.run();
 
         // modify captured to something that is testable

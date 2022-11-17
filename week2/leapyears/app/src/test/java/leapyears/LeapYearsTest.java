@@ -3,12 +3,15 @@
  */
 package leapyears;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Boolean.*;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LeapYearsTest {
+  // testing isLeapYear
   @Test public void testYear2000IsLeapYear() {
     int year = 2000;
     assertEquals(TRUE, LeapYears.isLeapYear(year));
@@ -27,5 +30,13 @@ public class LeapYearsTest {
   @Test public void testYear2009IsLeapYear() {
     int year = 2009;
     assertEquals(FALSE, LeapYears.isLeapYear(year));
+  }
+
+  // testing getLeapYears
+  @Test public void testLeapYearsBetween2000And2015() {
+    int startYear = 2000;
+    int endYear = 2005;
+    Integer[] allLeapYears = {2000, 2004};
+    assertEquals(Arrays.asList(allLeapYears), LeapYears.getLeapYears(startYear, endYear));
   }
 }

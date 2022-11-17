@@ -36,7 +36,6 @@ public class AppTest {
 
         // define user input and number of tries
         String[] appOutput = runApp("E\nF\nB\nX", 2);
-        System.out.println(Arrays.toString(appOutput));
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
@@ -99,7 +98,7 @@ public class AppTest {
 
         Game game1 = new Game(wordChoser, masker);
         Game game2 = new Game(wordChoser, masker);
-        App app = new App(input, new PrintStream(output), new ArrayList<>(List.of(game1, game2)), new Player(), tries);
+        App app = new App(input, new PrintStream(output), new ArrayList<>(List.of(game1, game2)), player, tries);
         app.run();
 
         // modify captured to something that is testable

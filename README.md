@@ -6,7 +6,7 @@ The first week is designed to write and execute basic Java programs, and also le
 After doing some basic exercises, I then build a more complex program (a CLI game) using object-oriented Java features.
 
 * [**game**](https://github.com/naomischlosser/java-apprenticeship/tree/main/week1/game)<br>
-> A CLI word guessing game developed in IntelliJ IDEA<br>
+  A CLI word guessing game developed in IntelliJ IDEA<br>
 
 * [**shop**](https://github.com/naomischlosser/java-apprenticeship/tree/main/week1/shop)<br>
-> A small shopping list app<br>
+  A small shopping list app<br>

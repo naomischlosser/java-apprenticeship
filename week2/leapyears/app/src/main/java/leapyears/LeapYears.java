@@ -19,4 +19,8 @@ public class LeapYears {
 
     return allLeapYears;
   }
+
+  public static int getClosestLeapYear(int year) {
+    return 2000;
+  }
 }

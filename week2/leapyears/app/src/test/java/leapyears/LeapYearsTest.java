@@ -46,4 +46,9 @@ public class LeapYearsTest {
     Integer[] allLeapYears = {2008, 2012};
     assertEquals(Arrays.asList(allLeapYears), LeapYears.getLeapYears(startYear, endYear));
   }
+
+  @Test public void testNearestLeapYearFor1999() {
+    int year = 1999;
+    assertEquals(2000, LeapYears.getClosestLeapYear(year));
+  }
 }

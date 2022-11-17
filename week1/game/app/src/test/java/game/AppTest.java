@@ -34,30 +34,34 @@ public class AppTest {
         when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
 
         // define user input and number of tries
-        String[] appOutput = runApp("E\nF\nB", 2);
+        String[] appOutput = runApp("Tara\nWill\nE\nF\nB", 2);
+
+        // enter players names
+        assertEquals("Enter name for player 1:", appOutput[0]);
+        assertEquals("Enter name for player 2:", appOutput[1]);
 
         // show welcome message
-        assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
-        assertEquals("Player 1: A_", appOutput[1]);
-        assertEquals("Player 2: C_", appOutput[2]);
+        assertEquals("Welcome! Today the word to guess is:", appOutput[3]);
+        assertEquals("Tara: A_", appOutput[4]);
+        assertEquals("Will: C_", appOutput[5]);
 
         // first loop
-        assertEquals("Player 1: Enter one letter to guess (10 attempts remaining):", appOutput[4]);
-        assertEquals("Wrong...", appOutput[5]);
-        assertEquals("A_", appOutput[6]);
+        assertEquals("Tara: Enter one letter to guess (10 attempts remaining):", appOutput[7]);
+        assertEquals("Wrong...", appOutput[8]);
+        assertEquals("A_", appOutput[9]);
 
         // second loop
-        assertEquals("Player 2: Enter one letter to guess (10 attempts remaining):", appOutput[8]);
-        assertEquals("Wrong...", appOutput[9]);
-        assertEquals("C_", appOutput[10]);
+        assertEquals("Will: Enter one letter to guess (10 attempts remaining):", appOutput[11]);
+        assertEquals("Wrong...", appOutput[12]);
+        assertEquals("C_", appOutput[13]);
 
         // third loop
-        assertEquals("Player 1: Enter one letter to guess (9 attempts remaining):", appOutput[12]);
-        assertEquals("Right!", appOutput[13]);
-        assertEquals("AB", appOutput[14]);
+        assertEquals("Tara: Enter one letter to guess (9 attempts remaining):", appOutput[15]);
+        assertEquals("Right!", appOutput[16]);
+        assertEquals("AB", appOutput[17]);
 
         // game results
-        assertEquals("Player 1 won!", appOutput[16]);
+        assertEquals("Tara won!", appOutput[19]);
     }
 
     @Test public void testPlayer1DoesNotGuessTwoLetter() throws IOException {

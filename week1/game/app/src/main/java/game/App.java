@@ -31,10 +31,17 @@ public class App {
     }
 
     public void run() throws IOException {
+        // enter players names
+        output.println("Enter name for player 1:");
+        String player1 = input.readLine();
+        output.println("Enter name for player 2:");
+        String player2 = input.readLine();
+        String[] players = {player1, player2};
+
         // print welcome message
-        output.println("Welcome! Today the word to guess is:");
-        output.printf("Player 1: %s\n", games.get(0).getWordToGuess());
-        output.printf("Player 2: %s\n\n", games.get(1).getWordToGuess());
+        output.println("\nWelcome! Today the word to guess is:");
+        output.printf("%s: %s\n", player1, games.get(0).getWordToGuess());
+        output.printf("%s: %s\n\n", player2, games.get(1).getWordToGuess());
 
         // randomise player
         int firstPlayer = player.randomisePlayer();
@@ -44,8 +51,9 @@ public class App {
             for (int j = 0; j < 2; j++) {
                 // determine who is playing
                 int player = (firstPlayer == 0) ? j : 1 - j;
+                String name = players[player];
                 Game game = games.get(player);
-                output.printf("Player %d: Enter one letter to guess (%d attempts remaining):\n", player+1, game.getRemainingAttempts());
+                output.printf("%s: Enter one letter to guess (%d attempts remaining):\n", name, game.getRemainingAttempts());
 
                 // check player's input
                 Character letter = input.readLine().charAt(0);
@@ -57,10 +65,10 @@ public class App {
 
                 // check if game is won or lost
                 if (game.isGameWon()) {
-                    output.printf("Player %s won!", player+1);
+                    output.printf("%s won!", name);
                     break gameloop;
                 } else if (game.isGameLost()) {
-                    output.printf("Player %s lost...", player+1);
+                    output.printf("%s lost...", name);
                     break gameloop;
                 }
             }

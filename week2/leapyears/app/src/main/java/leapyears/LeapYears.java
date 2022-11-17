@@ -4,7 +4,7 @@
 package leapyears;
 
 public class LeapYears {
-    public static Boolean isLeapYear(int year) {
-        return true;
-    }
+  public static Boolean isLeapYear(int year) {
+    return year % 400 == 0;
+  }
 }

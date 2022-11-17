@@ -5,12 +5,17 @@ package leapyears;
 
 import org.junit.Test;
 
-import static java.lang.Boolean.TRUE;
+import static java.lang.Boolean.*;
 import static org.junit.Assert.*;
 
 public class LeapYearsTest {
-    @Test public void testYear2000IsLeapYear() {
-        int year = 2000;
-        assertEquals(TRUE, LeapYears.isLeapYear(year));
-    }
+  @Test public void testYear2000IsLeapYear() {
+    int year = 2000;
+    assertEquals(TRUE, LeapYears.isLeapYear(year));
+  }
+
+  @Test public void testYear1700IsNotLeapYear() {
+    int year = 1700;
+    assertEquals(FALSE, LeapYears.isLeapYear(year));
+  }
 }

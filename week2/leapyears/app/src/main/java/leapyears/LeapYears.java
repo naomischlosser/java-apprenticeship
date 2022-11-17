@@ -3,12 +3,8 @@
  */
 package leapyears;
 
-public class LeapYear {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new LeapYear().getGreeting());
+public class LeapYears {
+    public static Boolean isLeapYear(int year) {
+        return true;
     }
 }

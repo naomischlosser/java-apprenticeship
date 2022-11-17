@@ -4,11 +4,13 @@
 package leapyears;
 
 import org.junit.Test;
+
+import static java.lang.Boolean.TRUE;
 import static org.junit.Assert.*;
 
-public class LeapYearTest {
+public class LeapYearsTest {
     @Test public void testYear2000IsLeapYear() {
-        LeapYear leapYear = new LeapYear();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        int year = 2000;
+        assertEquals(TRUE, LeapYears.isLeapYear(year));
     }
 }

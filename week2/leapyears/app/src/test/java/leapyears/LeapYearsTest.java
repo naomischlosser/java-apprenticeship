@@ -6,9 +6,9 @@ package leapyears;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
+public class LeapYearTest {
+    @Test public void testYear2000IsLeapYear() {
+        LeapYear leapYear = new LeapYear();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }

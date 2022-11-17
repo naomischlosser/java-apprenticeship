@@ -15,108 +15,108 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AppTest {
-    private static final WordChoser wordChoser = mock(WordChoser.class);
-    private static final Masker masker = mock(Masker.class);
-    private static final Player player = mock(Player.class);
+  private static final WordChoser wordChoser = mock(WordChoser.class);
+  private static final Masker masker = mock(Masker.class);
+  private static final Player player = mock(Player.class);
 
-    @Before public void setupTests() {
-        // mock word from dictionary
-        when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB", "CD");
+  @Before public void setupTests() {
+    // mock word from dictionary
+    when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB", "CD");
 
-        // mock first player
-        when(player.randomisePlayer()).thenReturn(0);
+    // mock first player
+    when(player.randomisePlayer()).thenReturn(0);
 
-        // mock getMaskedWord for player 1
-        when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
-        when(masker.getMaskedWord("AB", new ArrayList<>(List.of('B')))).thenReturn("AB");
+    // mock getMaskedWord for player 1
+    when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
+    when(masker.getMaskedWord("AB", new ArrayList<>(List.of('B')))).thenReturn("AB");
 
-        // mock getMaskedWord for player 2
-        when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
-    }
+    // mock getMaskedWord for player 2
+    when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
+  }
 
-    // two player game
-    @Test public void testPlayer1GuessesTwoLetterWordWithin10Tries() throws IOException {
-        // define user input and number of tries
-        String[] appOutput = runApp("Tara\nWill\nE\nF\nB", 2);
+  // two player game
+  @Test public void testPlayer1GuessesTwoLetterWordWithin10Tries() throws IOException {
+    // define user input and number of tries
+    String[] appOutput = runApp("Tara\nWill\nE\nF\nB", 2);
 
-        // enter players names
-        assertEquals("Enter name for player 1:", appOutput[0]);
-        assertEquals("Enter name for player 2:", appOutput[1]);
+    // enter players names
+    assertEquals("Enter name for player 1:", appOutput[0]);
+    assertEquals("Enter name for player 2:", appOutput[1]);
 
-        // show welcome message
-        assertEquals("Welcome! Today the word to guess is:", appOutput[3]);
-        assertEquals("Tara: A_", appOutput[4]);
-        assertEquals("Will: C_", appOutput[5]);
+    // show welcome message
+    assertEquals("Welcome! Today the word to guess is:", appOutput[3]);
+    assertEquals("Tara: A_", appOutput[4]);
+    assertEquals("Will: C_", appOutput[5]);
 
-        // first loop
-        assertEquals("Tara: Enter one letter to guess (10 attempts remaining):", appOutput[7]);
-        assertEquals("Wrong...", appOutput[8]);
-        assertEquals("A_", appOutput[9]);
+    // first loop
+    assertEquals("Tara: Enter one letter to guess (10 attempts remaining):", appOutput[7]);
+    assertEquals("Wrong...", appOutput[8]);
+    assertEquals("A_", appOutput[9]);
 
-        // second loop
-        assertEquals("Will: Enter one letter to guess (10 attempts remaining):", appOutput[11]);
-        assertEquals("Wrong...", appOutput[12]);
-        assertEquals("C_", appOutput[13]);
+    // second loop
+    assertEquals("Will: Enter one letter to guess (10 attempts remaining):", appOutput[11]);
+    assertEquals("Wrong...", appOutput[12]);
+    assertEquals("C_", appOutput[13]);
 
-        // third loop
-        assertEquals("Tara: Enter one letter to guess (9 attempts remaining):", appOutput[15]);
-        assertEquals("Right!", appOutput[16]);
-        assertEquals("AB", appOutput[17]);
+    // third loop
+    assertEquals("Tara: Enter one letter to guess (9 attempts remaining):", appOutput[15]);
+    assertEquals("Right!", appOutput[16]);
+    assertEquals("AB", appOutput[17]);
 
-        // game results
-        assertEquals("Tara won!", appOutput[19]);
-    }
+    // game results
+    assertEquals("Tara won!", appOutput[19]);
+  }
 
-    @Test public void testPlayer1DoesNotGuessTwoLetterWord() throws IOException {
-        // define user input and number of tries
-        String userInput = "Tara\nWill\n" + "X\n".repeat(20);
-        String[] appOutput = runApp(userInput, 10);
+  @Test public void testPlayer1DoesNotGuessTwoLetterWord() throws IOException {
+    // define user input and number of tries
+    String userInput = "Tara\nWill\n" + "X\n".repeat(20);
+    String[] appOutput = runApp(userInput, 10);
 
-        // enter players names
-        assertEquals("Enter name for player 1:", appOutput[0]);
-        assertEquals("Enter name for player 2:", appOutput[1]);
+    // enter players names
+    assertEquals("Enter name for player 1:", appOutput[0]);
+    assertEquals("Enter name for player 2:", appOutput[1]);
 
-        // show welcome message
-        assertEquals("Welcome! Today the word to guess is:", appOutput[3]);
-        assertEquals("Tara: A_", appOutput[4]);
-        assertEquals("Will: C_", appOutput[5]);
+    // show welcome message
+    assertEquals("Welcome! Today the word to guess is:", appOutput[3]);
+    assertEquals("Tara: A_", appOutput[4]);
+    assertEquals("Will: C_", appOutput[5]);
 
-        // first loop
-        assertEquals("Tara: Enter one letter to guess (10 attempts remaining):", appOutput[7]);
-        assertEquals("Wrong...", appOutput[8]);
-        assertEquals("A_", appOutput[9]);
+    // first loop
+    assertEquals("Tara: Enter one letter to guess (10 attempts remaining):", appOutput[7]);
+    assertEquals("Wrong...", appOutput[8]);
+    assertEquals("A_", appOutput[9]);
 
-        // tenth loop
-        assertEquals("Tara: Enter one letter to guess (1 attempts remaining):", appOutput[79]);
-        assertEquals("Wrong...", appOutput[80]);
-        assertEquals("A_", appOutput[81]);
+    // tenth loop
+    assertEquals("Tara: Enter one letter to guess (1 attempts remaining):", appOutput[79]);
+    assertEquals("Wrong...", appOutput[80]);
+    assertEquals("A_", appOutput[81]);
 
-        // game results
-        assertEquals("Tara lost...", appOutput[83]);
-    }
+    // game results
+    assertEquals("Tara lost...", appOutput[83]);
+  }
 
-    private String[] runApp(String userInput, int tries) throws IOException {
-        // instead of System.in (what a user types into the console)
-        InputStream input = new ByteArrayInputStream(userInput.getBytes());
+  private String[] runApp(String userInput, int tries) throws IOException {
+    // instead of System.in (what a user types into the console)
+    InputStream input = new ByteArrayInputStream(userInput.getBytes());
 
-        // instead of System.out (what the console returns)
-        ArrayList<Character> captured = new ArrayList<>();
-        OutputStream output = new OutputStream() {
-            @Override
-            public void write(int inByteValue) {
-                captured.add((char) inByteValue);
-            }
-        };
+    // instead of System.out (what the console returns)
+    ArrayList<Character> captured = new ArrayList<>();
+    OutputStream output = new OutputStream() {
+      @Override
+      public void write(int inByteValue) {
+        captured.add((char) inByteValue);
+      }
+    };
 
-        Game game1 = new Game(wordChoser, masker);
-        Game game2 = new Game(wordChoser, masker);
-        App app = new App(input, new PrintStream(output), new ArrayList<>(List.of(game1, game2)), player, tries);
-        app.run();
+    Game game1 = new Game(wordChoser, masker);
+    Game game2 = new Game(wordChoser, masker);
+    App app = new App(input, new PrintStream(output), new ArrayList<>(List.of(game1, game2)), player, tries);
+    app.run();
 
-        // modify captured to something that is testable
-        String appOutput = captured.stream()
-                .map(Object::toString)
-                .reduce("", (acc, e) -> acc  + e);
-        return appOutput.split("\\r?\\n");
-    }
+    // modify captured to something that is testable
+    String appOutput = captured.stream()
+        .map(Object::toString)
+        .reduce("", (acc, e) -> acc  + e);
+    return appOutput.split("\\r?\\n");
+  }
 }

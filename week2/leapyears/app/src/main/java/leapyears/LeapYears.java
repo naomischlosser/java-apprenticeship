@@ -14,9 +14,7 @@ public class LeapYears {
     ArrayList<Integer> allLeapYears = new ArrayList<>();
 
     for (int year = startYear; year <= endYear; year++) {
-      if (isLeapYear(year)) {
-        allLeapYears.add(year);
-      }
+      if (isLeapYear(year)) allLeapYears.add(year);
     }
 
     return allLeapYears;

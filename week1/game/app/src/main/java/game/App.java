@@ -31,6 +31,7 @@ public class App {
     }
 
     public void run() throws IOException {
+        // print welcome message
         output.println("Welcome! Today the word to guess is:");
         output.printf("Player 1: %s\n", games.get(0).getWordToGuess());
         output.printf("Player 2: %s\n\n", games.get(1).getWordToGuess());
@@ -41,22 +42,20 @@ public class App {
         gameloop:
         for (int i = 0; i < tries; i++) {
             for (int j = 0; j < 2; j++) {
+                // determine who is playing
                 int player = (firstPlayer == 0) ? j : 1 - j;
-
                 Game game = games.get(player);
                 output.printf("Player %d: Enter one letter to guess (%d attempts remaining):\n", player+1, game.getRemainingAttempts());
 
+                // check player's input
                 Character letter = input.readLine().charAt(0);
                 Boolean result = game.guessLetter(letter);
+                output.println(result ? "Right!" : "Wrong...");
 
-                if (result) {
-                    output.println("Right!");
-                } else {
-                    output.println("Wrong...");
-                }
-
+                // print wordToGuess
                 output.println(game.getWordToGuess() + "\n");
 
+                // check if game is won or lost
                 if (game.isGameWon()) {
                     output.printf("Player %s won!", player+1);
                     break gameloop;

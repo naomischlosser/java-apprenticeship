@@ -20,19 +20,22 @@ public class AppTest {
     private static final Player player = mock(Player.class);
 
     @Before public void setupTests() {
+        // mock word from dictionary
         when(wordChoser.getRandomWordFromDictionary()).thenReturn("AB", "CD");
-        when(player.randomisePlayer()).thenReturn(0);
-    }
 
-    // two player game
-    @Test public void testPlayer1GuessesTwoLetterWordWithin10Tries() throws IOException {
+        // mock first player
+        when(player.randomisePlayer()).thenReturn(0);
+
         // mock getMaskedWord for player 1
         when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
         when(masker.getMaskedWord("AB", new ArrayList<>(List.of('B')))).thenReturn("AB");
 
         // mock getMaskedWord for player 2
         when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
+    }
 
+    // two player game
+    @Test public void testPlayer1GuessesTwoLetterWordWithin10Tries() throws IOException {
         // define user input and number of tries
         String[] appOutput = runApp("Tara\nWill\nE\nF\nB", 2);
 
@@ -64,13 +67,7 @@ public class AppTest {
         assertEquals("Tara won!", appOutput[19]);
     }
 
-    @Test public void testPlayer1DoesNotGuessTwoLetter() throws IOException {
-        // mock getMaskedWord for player 1
-        when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
-
-        // mock getMaskedWord for player 2
-        when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
-
+    @Test public void testPlayer1DoesNotGuessTwoLetterWord() throws IOException {
         // define user input and number of tries
         String userInput = "Tara\nWill\n" + "X\n".repeat(20);
         String[] appOutput = runApp(userInput, 10);

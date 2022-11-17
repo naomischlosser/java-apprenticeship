@@ -4,7 +4,6 @@
 package leapyears;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LeapYears {
   public static Boolean isLeapYear(int year) {
@@ -13,8 +12,12 @@ public class LeapYears {
 
   public static ArrayList<Integer> getLeapYears(int startYear, int endYear) {
     ArrayList<Integer> allLeapYears = new ArrayList<>();
-    allLeapYears.add(2000);
-    allLeapYears.add(2004);
+
+    for (int year = startYear; year <= endYear; year++) {
+      if (isLeapYear(year)) {
+        allLeapYears.add(year);
+      }
+    }
 
     return allLeapYears;
   }

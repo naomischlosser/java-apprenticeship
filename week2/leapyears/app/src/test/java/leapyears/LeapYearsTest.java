@@ -33,10 +33,17 @@ public class LeapYearsTest {
   }
 
   // testing getLeapYears
-  @Test public void testLeapYearsBetween2000And2015() {
+  @Test public void testLeapYearsBetween2000And2005() {
     int startYear = 2000;
     int endYear = 2005;
     Integer[] allLeapYears = {2000, 2004};
+    assertEquals(Arrays.asList(allLeapYears), LeapYears.getLeapYears(startYear, endYear));
+  }
+
+  @Test public void testLeapYearsBetween2005And2015() {
+    int startYear = 2005;
+    int endYear = 2015;
+    Integer[] allLeapYears = {2008, 2012};
     assertEquals(Arrays.asList(allLeapYears), LeapYears.getLeapYears(startYear, endYear));
   }
 }

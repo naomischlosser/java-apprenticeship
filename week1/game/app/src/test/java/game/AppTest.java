@@ -35,7 +35,7 @@ public class AppTest {
         when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
 
         // define user input and number of tries
-        String[] appOutput = runApp("E\nF\nB\nX", 2);
+        String[] appOutput = runApp("E\nF\nB", 2);
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
@@ -61,26 +61,34 @@ public class AppTest {
         assertEquals("Player 1 won!", appOutput[16]);
     }
 
-    @Test public void testGuessTwoLetterWordGoneWrong() throws IOException {
-        // mock getMaskedWord
+    @Test public void testPlayer1DoesNotGuessTwoLetter() throws IOException {
+        // mock getMaskedWord for player 1
         when(masker.getMaskedWord("AB", new ArrayList<>())).thenReturn("A_");
 
+        // mock getMaskedWord for player 2
+        when(masker.getMaskedWord("CD", new ArrayList<>())).thenReturn("C_");
+
         // define user input and number of tries
-        String userInput = "C\n".repeat(10);
-        String[] appOutput = runApp(userInput, 11);
+        String userInput = "X\n".repeat(20);
+        String[] appOutput = runApp(userInput, 10);
 
         // show welcome message
         assertEquals("Welcome! Today the word to guess is:", appOutput[0]);
+        assertEquals("Player 1: A_", appOutput[1]);
+        assertEquals("Player 2: C_", appOutput[2]);
 
         // first loop
-        assertEquals("A_", appOutput[1]);
-        assertEquals("Enter one letter to guess (10 attempts remaining):", appOutput[2]);
-        assertEquals("Wrong...", appOutput[3]);
+        assertEquals("Player 1: Enter one letter to guess (10 attempts remaining):", appOutput[4]);
+        assertEquals("Wrong...", appOutput[5]);
+        assertEquals("A_", appOutput[6]);
 
         // tenth loop
-        assertEquals("Enter one letter to guess (1 attempts remaining):", appOutput[29]);
-        assertEquals("Wrong...", appOutput[30]);
-        assertEquals("You lost...", appOutput[32]);
+        assertEquals("Player 1: Enter one letter to guess (1 attempts remaining):", appOutput[76]);
+        assertEquals("Wrong...", appOutput[77]);
+        assertEquals("A_", appOutput[78]);
+
+        // game results
+        assertEquals("Player 1 lost...", appOutput[80]);
     }
 
     private String[] runApp(String userInput, int tries) throws IOException {

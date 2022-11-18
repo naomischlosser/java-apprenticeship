@@ -13,21 +13,20 @@ import static org.junit.Assert.*;
 public class ChangeGeneratorTest {
   @Test public void testConvert50Pounds() {
     Double value = 50.00;
-    String[] result = {"£50"};
-    assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
-  }
-
-  @Test public void testConvert20Pounds() {
-    Double value = 20.00;
-    String[] result = {"£20"};
+    Integer[] result = {5000};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
 
   @Test public void testConvert50Pence() {
     Double value = 0.50;
-    String[] result = {"50p"};
+    Integer[] result = {5000};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
 
+  @Test public void testConvert15Pounds() {
+    Double value = 15.00;
+    Integer[] result = {1000, 500};
+    assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
+  }
 
 }

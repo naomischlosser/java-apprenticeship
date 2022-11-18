@@ -6,18 +6,16 @@ package change_converter;
 import java.util.ArrayList;
 
 public class ChangeGenerator {
+  private static final int[] cents = {5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1};
 
-  public static ArrayList<String> convert(Double value) {
-    String formattedValue;
-    ArrayList<String> notesAndCoins = new ArrayList<>();
+  public static ArrayList<Integer> convert(Double value) {
+    ArrayList<Integer> notesAndCoins = new ArrayList<>();
 
-    if (value >= 1) {
-      formattedValue = String.format("£%.0f", value);
-    } else {
-      formattedValue = String.format("%.0fp", value * 100);
-    }
+    double cents = value * 100;
 
-    notesAndCoins.add(formattedValue);
+    Integer newValue = (int) cents;
+
+    notesAndCoins.add(newValue);
 
     return notesAndCoins;
   }

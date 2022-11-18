@@ -10,12 +10,11 @@ import java.util.Locale;
 
 public class ChangeGenerator {
 
-    public static ArrayList<String> convert(BigDecimal value) {
-        ArrayList<String> notesAndCoins = new ArrayList<>();
-//        NumberFormat UKFormat = NumberFormat.getCurrencyInstance(Locale.UK);
-//        String formattedString = UKFormat.format(value);
+    public static ArrayList<String> convert(Float value) {
+        String formattedValue = String.format("£%.0f", value);
 
-        notesAndCoins.add("£50");
+        ArrayList<String> notesAndCoins = new ArrayList<>();
+        notesAndCoins.add(formattedValue);
 
         return notesAndCoins;
     }

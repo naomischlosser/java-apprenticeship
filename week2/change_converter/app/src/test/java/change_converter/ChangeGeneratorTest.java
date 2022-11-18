@@ -12,8 +12,14 @@ import static org.junit.Assert.*;
 
 public class ChangeGeneratorTest {
     @Test public void testConvert50Pounds() {
-        BigDecimal value = BigDecimal.valueOf(50.00);
+        Float value = 50.00f;
         String[] result = {"£50"};
-        assertNotNull(Arrays.asList(result).toString(), ChangeGenerator.convert(value));
+        assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
+    }
+
+    @Test public void testConvert20Pounds() {
+        Float value = 20f;
+        String[] result = {"£20"};
+        assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
     }
 }

@@ -14,7 +14,7 @@ public class ChangeGenerator {
     if (value >= 1) {
       formattedValue = String.format("£%.0f", value);
     } else {
-      formattedValue = String.format("%.0fp", value * 10);
+      formattedValue = String.format("%.0fp", value * 100);
     }
 
     notesAndCoins.add(formattedValue);

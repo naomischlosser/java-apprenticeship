@@ -25,7 +25,7 @@ public class ChangeGeneratorTest {
 
   @Test public void testConvert50Pence() {
     Float value = 0.50f;
-    String[] result = {"5p"};
+    String[] result = {"50p"};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
 }

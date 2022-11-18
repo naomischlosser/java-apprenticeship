@@ -12,20 +12,22 @@ import static org.junit.Assert.*;
 
 public class ChangeGeneratorTest {
   @Test public void testConvert50Pounds() {
-    Float value = 50.00f;
+    Double value = 50.00;
     String[] result = {"£50"};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
 
   @Test public void testConvert20Pounds() {
-    Float value = 20f;
+    Double value = 20.00;
     String[] result = {"£20"};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
 
   @Test public void testConvert50Pence() {
-    Float value = 0.50f;
+    Double value = 0.50;
     String[] result = {"50p"};
     assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
   }
+
+
 }

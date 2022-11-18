@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ChangeGenerator {
 
-  public static ArrayList<String> convert(Float value) {
+  public static ArrayList<String> convert(Double value) {
     String formattedValue;
     ArrayList<String> notesAndCoins = new ArrayList<>();
 

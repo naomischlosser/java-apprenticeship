@@ -11,15 +11,21 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class ChangeGeneratorTest {
-    @Test public void testConvert50Pounds() {
-        Float value = 50.00f;
-        String[] result = {"£50"};
-        assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
-    }
+  @Test public void testConvert50Pounds() {
+    Float value = 50.00f;
+    String[] result = {"£50"};
+    assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
+  }
 
-    @Test public void testConvert20Pounds() {
-        Float value = 20f;
-        String[] result = {"£20"};
-        assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
-    }
+  @Test public void testConvert20Pounds() {
+    Float value = 20f;
+    String[] result = {"£20"};
+    assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
+  }
+
+  @Test public void testConvert50Pence() {
+    Float value = 0.50f;
+    String[] result = {"5p"};
+    assertEquals(Arrays.asList(result), ChangeGenerator.convert(value));
+  }
 }

@@ -3,19 +3,22 @@
  */
 package change_converter;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ChangeGenerator {
 
-    public static ArrayList<String> convert(Float value) {
-        String formattedValue = String.format("£%.0f", value);
+  public static ArrayList<String> convert(Float value) {
+    String formattedValue;
+    ArrayList<String> notesAndCoins = new ArrayList<>();
 
-        ArrayList<String> notesAndCoins = new ArrayList<>();
-        notesAndCoins.add(formattedValue);
-
-        return notesAndCoins;
+    if (value >= 1) {
+      formattedValue = String.format("£%.0f", value);
+    } else {
+      formattedValue = String.format("%.0fp", value * 10);
     }
+
+    notesAndCoins.add(formattedValue);
+
+    return notesAndCoins;
+  }
 }
